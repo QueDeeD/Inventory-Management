@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 from database import init_db, add_product, get_products, delete_product
+from analytics import predict_demand
 
 app = Flask(__name__)
 init_db()
@@ -7,7 +8,8 @@ init_db()
 @app.route('/')
 def index():
     products = get_products()
-    return render_template('index.html', products=products)
+    prediction = predict_demand()
+    return render_template('index.html', products=products, prediction=prediction)
 
 @app.route('/add', methods=['POST'])
 def add():
