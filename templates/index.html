@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Учет товаров</title>
+</head>
+<body>
+    <h1>Склад</h1>
+    <form method="POST" action="/add">
+        <input type="text" name="name" placeholder="Название" required>
+        <input type="number" name="quantity" placeholder="Количество" required>
+        <input type="number" step="0.01" name="price" placeholder="Цена" required>
+        <button type="submit">Добавить</button>
+    </form>
+    <ul>
+        {% for product in products %}
+            <li>
+                {{ product[1] }} ({{ product[2] }} шт.) - {{ product[3] }} руб.
+                <a href="/delete/{{ product[0] }}">Удалить</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
